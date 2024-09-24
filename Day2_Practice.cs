@@ -61,7 +61,7 @@ public class Day2_Practice : MonoBehaviour
         }
 
         //#5
-        for (int i = 1; i <= 1000; i += 5)
+        for (int i = 5; i <= 1000; i += 5)
         {
             if (func(i + ""))
             {
