@@ -6,11 +6,16 @@ public class Wizard : Character
 {
     public int Mp;
 
+    public Wizard(string name, int hp) : base(name, hp)
+    {
+
+    }
+
     public Wizard(string name,int hp,int mp)
     {
-        this.Name = name;
-        this.Hp = hp;
-        this.Mp = mp;
+        //this.Name = name;
+        //this.Hp = hp;
+        //this.Mp = mp;
     }
     public void useMagic()
     {

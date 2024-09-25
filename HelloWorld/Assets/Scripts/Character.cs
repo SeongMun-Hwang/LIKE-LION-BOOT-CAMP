@@ -4,8 +4,20 @@ using UnityEngine;
 
 public class Character
 {
-    public string Name;
-    public int Hp;
+    private string Name;
+    protected int Hp;
+    public static string Shout = "We are Character";
+    public static int counter = 0;
+
+    public static void WeAre()
+    {
+        Debug.Log(Shout);
+    }
+    public int HP
+    {
+        get { return Hp; }
+        set { Hp= value; }
+    }
 
     public Character()
     {
@@ -17,13 +29,18 @@ public class Character
         this.Hp = hp;
     }
 
-    public void Hit(int damage)
+    public virtual void Hit(int damage)
     {
+        counter++;
         Hp -= damage;
+        Debug.Log("Ouch");
     }
     public void Heal(int heal)
     {
-        Hp += heal;
+        if (isAlive())
+        {
+            Hp += heal;
+        }
     }
     public bool isAlive()
     {

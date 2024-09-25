@@ -4,43 +4,24 @@ using UnityEngine;
 
 public class HelloWorld : MonoBehaviour
 {
-    // Start is called before the first frame update
-    float Area(float x, float y)
-    {
-        x += 1;
-        return x * y;
-    }
     void Start()
     {
-        Debug.Log("Hello World!");
-        float x = 10f;
-        float y = 20f;
-        Debug.Log(Area(x, y));
+        Car car= new Car();
+        car.TurnOn();
 
-        Character c = new Character("Kim", 10);
-        Food f = new Food();
-        f.Name = "Protein";
-        f.Hp = 5;
+        ITurnOnable anObject = car;
+        anObject.TurnOff();
 
-        c.Hit(5);
-        c.Heal(3);
+        Character.WeAre();
+        Debug.Log(Character.Shout);
 
-        c.Eat(f);
-        Debug.Log(c.Hp);
-        Debug.Log(c.isAlive());
+        Character c1=new Character();
+        Character c2=new Character();
 
-        c.Hit(999);
-        c.Eat(f);
-        Debug.Log(c.Hp);
-        Debug.Log(c.isAlive());
+        c1.Hit(10);
+        c2.Hit(10);
 
-        Wizard wizard = new Wizard("¸¶¹ý»ç",15,20);
-        wizard.useMagic();
+        Debug.Log(Character.counter);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }
