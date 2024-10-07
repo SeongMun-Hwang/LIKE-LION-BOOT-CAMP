@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - Enemy
+  - Terrain
   layers:
   - Default
   - TransparentFX
@@ -53,6 +54,9 @@ TagManager:
     locked: 0
   - name: Character
     uniqueID: 2564970011
+    locked: 0
+  - name: Effect
+    uniqueID: 1070347809
     locked: 0
   m_RenderingLayers:
   - Default

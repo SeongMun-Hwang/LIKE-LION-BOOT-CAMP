@@ -7,6 +7,7 @@ public class EndPoint : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Debug.Log("End Point Tirgger");
+            GameManager.Instance.GameClear();
         }
     }
 }

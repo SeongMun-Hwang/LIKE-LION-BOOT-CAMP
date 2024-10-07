@@ -13,6 +13,15 @@ public class GameManager : MonoBehaviour
 
     public GameObject Camera;
     public GameObject[] Lives;
+
+    [SerializeField]
+    private GameObject popupCanvas;
+
+    private bool isCleared;
+    public bool IsCleared {  get { return isCleared; } }
+
+    public ObjectPool BulletPool;
+
     public static GameManager Instance
     {
         get { return instance; }
@@ -31,6 +40,10 @@ public class GameManager : MonoBehaviour
     {
         TimeLimit -= Time.deltaTime;
         TimeLimitText.text = "Time Left : " + (int)TimeLimit;
+        if (TimeLimit < 0)
+        {
+            GameOver();
+        }
     }
     public void AddTime(float time)
     {
@@ -59,6 +72,13 @@ public class GameManager : MonoBehaviour
     }
     void GameOver()
     {
+        isCleared=false;
+        popupCanvas.SetActive(true);
         Debug.Log("Game Over");
+    }
+    public void GameClear()
+    {
+        isCleared = true;
+        popupCanvas.SetActive(true);
     }
 }

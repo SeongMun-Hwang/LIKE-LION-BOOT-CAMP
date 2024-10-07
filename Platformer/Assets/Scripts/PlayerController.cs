@@ -37,6 +37,17 @@ public class PlayerController : MonoBehaviour
 
         HandleMovement();
         HandleAnimation();
+        if (Input.GetButtonDown("Fire1"))
+        {
+            Vector2 bulletV = new Vector2(10, 0);
+            if (GetComponent<SpriteRenderer>().flipX)
+            {
+                bulletV.x = -bulletV.x;
+            }
+            GameObject bullet = GameManager.Instance.BulletPool.GetObject();
+            bullet.transform.position = transform.position;
+            bullet.GetComponent<Bullet>().Velocity = bulletV;
+        }
     }
 
     void HandleMovement()
