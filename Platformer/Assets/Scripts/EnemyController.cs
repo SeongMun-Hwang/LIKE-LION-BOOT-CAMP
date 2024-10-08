@@ -26,7 +26,7 @@ public class EnemyController : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        transform.Translate(vx * Time.deltaTime);
+        transform.Translate(vx * Time.fixedDeltaTime);
     }
     public void Hit(int damage)
     {

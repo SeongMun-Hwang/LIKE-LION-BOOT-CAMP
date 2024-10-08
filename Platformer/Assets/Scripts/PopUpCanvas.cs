@@ -29,6 +29,7 @@ public class PopUpCanvas : MonoBehaviour
         {
             resultTitle.text = "Game Over!";
             scoreText.text = "";
+            highScore.SetActive(false);
         }
     }
     public void AgainPressed()
@@ -38,7 +39,8 @@ public class PopUpCanvas : MonoBehaviour
     }
     public void QuitPressed()
     {
-        Application.Quit();
+        Time.timeScale = 1;
+        SceneManager.LoadScene("LevelSelect");
     }
     void SaveHighScore()
     {

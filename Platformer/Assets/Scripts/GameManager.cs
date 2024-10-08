@@ -12,7 +12,6 @@ public class GameManager : MonoBehaviour
     public PlayerController playerController;
 
     public GameObject Camera;
-    public GameObject[] Lives;
 
     [SerializeField]
     private GameObject popupCanvas;
@@ -34,8 +33,10 @@ public class GameManager : MonoBehaviour
     {
         instance = this;
         life = 3;
+        Instantiate(LevelManager.Instance.SelectedPrefab);
+        LifeDisplayerInstance.SetLives(life);
     }
-
+    
     void Update()
     {
         TimeLimit -= Time.deltaTime;
@@ -56,7 +57,6 @@ public class GameManager : MonoBehaviour
         LifeDisplayerInstance.SetLives(life);
 
         Invoke("Restart", 2);
-        Debug.Log("dead");
     }
     void Restart()
     {
