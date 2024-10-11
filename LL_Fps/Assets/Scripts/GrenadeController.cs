@@ -18,12 +18,14 @@ public class GrenadeController : WeaponController
         Vector3 forward=cam.transform.forward;
         Vector3 up =cam.transform.up;
 
-        Vector3 direction= forward+up*Mathf.Tan(grenadeAngle*Mathf.Deg2Rad);
+        //Vector3 direction = Quaternion.AngleAxis(-ProjectileAngle, cam.transform.right) * forward;
+
+        Vector3 direction = forward+up*Mathf.Tan(grenadeAngle*Mathf.Deg2Rad);
 
         direction.Normalize();
         direction *= grenadeForce;
 
-        GameObject go=Instantiate(grenadePrefab);
+        GameObject go = Instantiate(grenadePrefab);
         go.transform.position = firePosition.position;
         go.GetComponent<Rigidbody>().AddForce(direction, ForceMode.Impulse);
         go.GetComponent<Bomb>().time = grenadeTime;
