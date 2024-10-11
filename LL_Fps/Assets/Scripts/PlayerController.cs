@@ -29,7 +29,9 @@ public class PlayerController : MonoBehaviour
     //ÃÑ
     InputAction fireAction;
     InputAction reloadAction;
-    public WeaponController weaponController;
+
+    public List<WeaponController> weapons;
+    int currentWeaponIndex;
 
     private void Start()
     {
@@ -119,12 +121,12 @@ public class PlayerController : MonoBehaviour
         //ÃÑ ¹ß»ç
         if (fireAction.WasCompletedThisFrame())
         {
-            weaponController.FireWeapon();
+            weapons[currentWeaponIndex].FireWeapon();
         }
         //ÀçÀåÀü
         if (reloadAction.WasCompletedThisFrame())
         {
-            weaponController.ReloadWeapon();
+            weapons[currentWeaponIndex].ReloadWeapon();
         }
     }
     void OnJump()
@@ -134,5 +136,17 @@ public class PlayerController : MonoBehaviour
             verticalSpeed = jumpSpeed;
             isGrounded = false;
         }
+    }
+
+    public void OnChangeWeapon()
+    {
+        weapons[currentWeaponIndex].gameObject.SetActive(false);
+        currentWeaponIndex++;
+
+        if (currentWeaponIndex > weapons.Count - 1)
+        {
+            currentWeaponIndex = 0;
+        }
+        weapons[currentWeaponIndex].gameObject.SetActive(true);
     }
 }
