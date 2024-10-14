@@ -3,7 +3,7 @@ using UnityEngine;
 public class Bomb : MonoBehaviour
 {
     public float time;
-
+    public float damage;
     private void Update()
     {
         time-= Time.deltaTime;
@@ -12,6 +12,13 @@ public class Bomb : MonoBehaviour
         {
             GetComponent<Animator>().SetTrigger("Explode");
             Destroy(gameObject, 2);
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Enemy")
+        {
+            other.GetComponent<Health>().Damage(damage);
         }
     }
 }

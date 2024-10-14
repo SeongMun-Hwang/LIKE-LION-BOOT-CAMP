@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, Health.IHealthListenter
 {
     public float WalkingSpeed = 7;
     public float mouseSensitive = 1;
@@ -55,6 +55,8 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if(!GameManager.Instance.isPlaying) return;
+
         Vector2 moveVector = moveAction.ReadValue<Vector2>();
         Vector3 move = new Vector3(moveVector.x, 0, moveVector.y);
 
@@ -148,5 +150,10 @@ public class PlayerController : MonoBehaviour
             currentWeaponIndex = 0;
         }
         weapons[currentWeaponIndex].gameObject.SetActive(true);
+    }
+    public void OnDie()
+    {
+        GetComponent<Animator>().SetTrigger("Death");
+        GameManager.Instance.GameEnd();
     }
 }

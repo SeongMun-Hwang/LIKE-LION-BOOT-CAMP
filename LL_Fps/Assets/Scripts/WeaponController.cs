@@ -14,6 +14,8 @@ public class WeaponController : MonoBehaviour
     public int totalBullet = 12;
     public int maxBullet = 12;
     public TextMeshProUGUI bulletText;
+
+    public float damage;
     private void Start()
     {
         animator = GetComponent<Animator>();
@@ -79,7 +81,6 @@ public class WeaponController : MonoBehaviour
     }
     public void RayCastFire()
     {
-        Debug.Log("Here");
         Camera cam = Camera.main;
         RaycastHit hit;
         Ray r = cam.ViewportPointToRay(Vector3.one / 2);
@@ -92,6 +93,11 @@ public class WeaponController : MonoBehaviour
             //GameObject particle = Instantiate(particlePrefab);
             //particle.transform.position = hitPosition;
             //particle.transform.forward = hit.normal;
+
+            if (hit.collider.CompareTag("Enemy"))
+            {
+                hit.collider.GetComponent<Health>().Damage(damage);
+            }
         }
         GameObject go = Instantiate(linePrefab);
         Vector3[] pos = new Vector3[] { firePosition.position, hitPosition };
