@@ -86,5 +86,41 @@ namespace C_
                 previous.Next = current.Next;
             }
         }
+        public T PopFirst()
+        {
+            if(head == null)
+            {
+                return default;
+            }
+            T data=head.Data;
+            head = head.Next;
+
+            return data;
+        }
+        public T PopLast()
+        {
+            if (head == null)
+            {
+                return default;
+            }
+            if(head.Next == null)
+            {
+                T data2 = head.Data;
+                head = null;
+                return data2;
+            }
+
+            LinkedListNode<T> current = head;
+            LinkedListNode<T> previous = null;
+
+            while (current.Next != null)
+            {
+                previous = current;
+                current = current.Next;
+            }
+            T data = current.Data;
+            previous.Next = null;
+            return data;
+        }
     }
 }
