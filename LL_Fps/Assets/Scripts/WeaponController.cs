@@ -16,6 +16,8 @@ public class WeaponController : MonoBehaviour
     public TextMeshProUGUI bulletText;
 
     public float damage;
+    public AudioClip gunSound;
+
     private void Start()
     {
         animator = GetComponent<Animator>();
@@ -81,6 +83,7 @@ public class WeaponController : MonoBehaviour
     }
     public void RayCastFire()
     {
+        GetComponent<AudioSource>().PlayOneShot(gunSound);
         Camera cam = Camera.main;
         RaycastHit hit;
         Ray r = cam.ViewportPointToRay(Vector3.one / 2);

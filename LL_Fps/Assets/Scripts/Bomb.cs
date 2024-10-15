@@ -4,11 +4,12 @@ public class Bomb : MonoBehaviour
 {
     public float time;
     public float damage;
+    public AudioClip bombSound;
     private void Update()
     {
-        time-= Time.deltaTime;
+        time -= Time.deltaTime;
 
-        if(time < 0)
+        if (time < 0)
         {
             GetComponent<Animator>().SetTrigger("Explode");
             Destroy(gameObject, 2);
@@ -20,5 +21,9 @@ public class Bomb : MonoBehaviour
         {
             other.GetComponent<Health>().Damage(damage);
         }
+    }
+    public void PlaySound()
+    {
+        GetComponent<AudioSource>().PlayOneShot(bombSound);
     }
 }

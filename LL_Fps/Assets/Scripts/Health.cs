@@ -12,6 +12,9 @@ public class Health : MonoBehaviour
 
     public Image healthBar;
 
+    public AudioClip dieSound;
+    public AudioClip hurtSound;
+
     void Update()
     {
         healthListenter = GetComponent<IHealthListenter>();
@@ -21,7 +24,7 @@ public class Health : MonoBehaviour
         if (hp > 0 && lastDamageTime + invincibleTime < Time.time)
         {
             hp -= damage;
-            if(healthBar!= null)
+            if (healthBar != null)
             {
                 healthBar.fillAmount = hp / maxHp;
             }
@@ -32,11 +35,13 @@ public class Health : MonoBehaviour
                 if (healthListenter != null)
                 {
                     healthListenter.OnDie();
+                    if(dieSound != null) GetComponent<AudioSource>().PlayOneShot(dieSound);
                     Debug.Log(gameObject.tag + " : À¸¾Ó Áê±Ý");
                 }
             }
             else
             {
+                if(hurtSound != null) GetComponent<AudioSource>().PlayOneShot(hurtSound);
                 Debug.Log(gameObject.tag + " : ¾î¾ý \nDamaged : " + damage);
             }
         }

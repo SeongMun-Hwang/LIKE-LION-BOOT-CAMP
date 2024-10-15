@@ -6,6 +6,8 @@ public class Enemy : MonoBehaviour, Health.IHealthListenter
     NavMeshAgent agent;
     GameObject player;
     Animator animator;
+
+    AudioSource audioSource;
     enum State
     {
         Idle,
@@ -28,6 +30,8 @@ public class Enemy : MonoBehaviour, Health.IHealthListenter
 
         state = State.Idle;
         currentStateTime = timeForNextState;
+
+        audioSource=GetComponent<AudioSource>();
     }
     void Update()
     {
@@ -65,6 +69,7 @@ public class Enemy : MonoBehaviour, Health.IHealthListenter
     }
     void StartIdle()
     {
+        audioSource.Stop();
         state = State.Idle;
         currentStateTime = timeForNextState;
         agent.isStopped = true;
@@ -72,6 +77,7 @@ public class Enemy : MonoBehaviour, Health.IHealthListenter
     }
     void StartFollow()
     {
+        audioSource.Play();
         state = State.Follow;
         agent.destination = player.transform.position;
         agent.isStopped = false;
