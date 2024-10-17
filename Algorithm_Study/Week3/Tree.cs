@@ -12,7 +12,7 @@ namespace C_
         public TreeNode<T> Root;
         public Tree(T rootData)
         {
-            Root = new TreeNode<T> (rootData);
+            Root = new TreeNode<T>(rootData);
         }
         public void Print()
         {
@@ -44,7 +44,7 @@ namespace C_
         }
         public TreeNode<T> FindChild(T data)
         {
-            foreach(TreeNode<T> child in Children)
+            foreach (TreeNode<T> child in Children)
             {
                 if (child.Data.Equals(data))
                 {
@@ -60,5 +60,37 @@ namespace C_
                 Console.WriteLine(child.Data.ToString());
             }
         }
-    }     
+        public TreeNode<T> FindParent(TreeNode<T> current)
+        {
+            foreach (TreeNode<T> child in current.Children)
+            {
+                if (child == this)
+                {
+                    return current;
+                }
+                TreeNode<T> result = FindParent(child);
+                if (result != null)
+                {
+                    return result;
+                }
+            }
+            return null;
+        }
+        public string FindPath(TreeNode<T> current, string path = "")
+        {
+            if (current == this)
+            {
+                return path + "/" + current.Data;
+            }
+            foreach (TreeNode<T> child in current.Children)
+            {
+                string p = FindPath(child, path + "/" + current.Data);
+                if (p != null)
+                {
+                    return p;
+                }
+            }
+            return null;
+        }
+    }
 }

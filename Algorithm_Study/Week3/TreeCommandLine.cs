@@ -74,6 +74,9 @@ namespace C_
                             Console.WriteLine("There's no Data");
                         }
                         break;
+                    case "pwd":
+                        Console.WriteLine(current.FindPath(root));
+                        break;
                 }
                 if (parts[0] == "exit")
                 {
