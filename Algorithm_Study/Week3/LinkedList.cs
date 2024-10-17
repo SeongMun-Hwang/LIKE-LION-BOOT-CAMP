@@ -122,5 +122,22 @@ namespace C_
             previous.Next = null;
             return data;
         }
+        public T PeekLast()
+        {
+            if (head == null)
+            {
+                return default;
+            }
+            LinkedListNode<T> current = head;
+            while(current.Next != null)
+            {
+                current= current.Next;  
+            }
+            return current.Data;
+        }
+        public bool IsEmpty()
+        {
+            return head == null;
+        }
     }
 }
