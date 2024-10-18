@@ -10,6 +10,7 @@ namespace C_
     internal class Tree<T>
     {
         public TreeNode<T> Root;
+        public int maxDepth = 0;
         public Tree(T rootData)
         {
             Root = new TreeNode<T>(rootData);
@@ -17,6 +18,77 @@ namespace C_
         public void Print()
         {
             Root.PrintTree();
+        }
+        public void MaxDepth(TreeNode<T> node, int current =1)
+        {
+            if (node == null) return;
+            maxDepth=Math.Max(maxDepth, current);
+
+            foreach(TreeNode<T> child in node.Children)
+            {
+                MaxDepth(child, current);
+            }
+        }
+        public int Sum(TreeNode<int> node)
+        {
+            if(node == null) return 0;
+            int sum = node.Data;
+            foreach(TreeNode<int> child in node.Children)
+            {
+                sum += Sum(child);
+            }
+            return sum;
+        }
+        public void FindTargetSum(TreeNode<int> node, int target, List<int> path, int currentSum)
+        {
+            if (node == null) return;
+            path.Add(node.Data);
+            currentSum += node.Data;
+
+            if(node.Children.Count==0 && currentSum == target)
+            {
+                Console.WriteLine("Path : " + string.Join(", ", path));
+            }
+            foreach(TreeNode<int> child in node.Children)
+            {
+                FindTargetSum(child, target, path, currentSum);
+            }
+            path.RemoveAt(path.Count - 1);
+        }
+        public bool FindPath(TreeNode<char> node, char target, List<TreeNode<char>> path)
+        {
+            if(node==null) return false;
+            path.Add(node);
+            if(node.Data==target) return true;
+
+            foreach(TreeNode<char> child in node.Children){
+                if(FindPath(child, target, path)) return true;
+            }
+
+            path.RemoveAt(path.Count-1);
+            return false;
+        }
+        public TreeNode<char> FindCLA(char node1, char node2)
+        {
+            List<TreeNode<char>> path1=new List<TreeNode<char>>();
+            List<TreeNode<char>> path2=new List<TreeNode<char>>();
+
+            if (FindPath(Root as TreeNode<char>, node1, path1) || 
+                !FindPath(Root as TreeNode<char>, node2,path2))
+            {
+                Console.WriteLine("Not Found");
+                return null;
+            }
+            int i = 0;
+            for(i=0;i<path1.Count && i < path2.Count; i++)
+            {
+                if (path1[i].Data != path2[i].Data)
+                {
+                    break;
+                }
+            }
+            return path1[i-1];
+
         }
     }
     public class TreeNode<T>
