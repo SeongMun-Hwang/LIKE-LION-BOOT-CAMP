@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class StateMachine
@@ -10,6 +11,9 @@ public class StateMachine
     public AttackState attackState;
     public RunState runState;
     public DeathState deathState;
+
+    public event Action<IState> stateChanged; //event를 붙히면 변수에 변수들을 쌓음
+    //Action<IState> 파라미터로 IState타입을 건네주는 void 함수. 파라미터 없이 하려면 Action
 
     public StateMachine(PlayerController player)
     {
@@ -24,12 +28,16 @@ public class StateMachine
     {
         CurrentState = state;
         state.Enter();
+
+        stateChanged?.Invoke(state);
     }
     public void TransitionTo(IState nextState)
     {
         CurrentState.Exit();
         CurrentState= nextState;
         CurrentState.Enter();
+
+        stateChanged?.Invoke(CurrentState);
     }
     public void Execute()
     {
