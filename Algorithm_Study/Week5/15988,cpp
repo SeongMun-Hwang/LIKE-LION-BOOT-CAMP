@@ -1,0 +1,35 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+vector<long long> DP(int n) {
+	vector<long long> dp(n + 1, 0);
+	dp[0] = 1;
+
+	for (int i = 1; i <= n; i++) {
+		if (i >= 1) dp[i] = (dp[i] + dp[i - 1]) % 1000000009;
+		if (i >= 2) dp[i] = (dp[i] + dp[i - 2]) % 1000000009;
+		if (i >= 3) dp[i] = (dp[i] + dp[i - 3]) % 1000000009;
+	}
+	return dp;
+}
+
+int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+
+	int n;
+	cin >> n;
+	vector<int> nums(n);
+	int max = 0;
+	for (int i = 0; i < n; i++) {
+		cin >> nums[i];
+		if (nums[i] > max) max = nums[i];
+	}
+
+	vector<long long> dp = DP(max);
+	for (int i = 0; i < n; i++) {
+		cout << dp[nums[i]] << "\n";
+	}
+	return 0;
+}
